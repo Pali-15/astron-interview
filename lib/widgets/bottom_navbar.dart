@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:template/extensions/context_extension.dart';
 import 'package:template/theme.dart';
 
 class BottomNavbar extends StatelessWidget {
@@ -14,7 +15,8 @@ class BottomNavbar extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.data_saver_off_outlined), label: 'Repositories'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
         currentIndex: navigationShell.currentIndex,
@@ -24,6 +26,9 @@ class BottomNavbar extends StatelessWidget {
           }
         },
         selectedItemColor: AppColors.blue,
+        selectedLabelStyle:
+            context.textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
+        unselectedLabelStyle: context.textTheme.bodyMedium,
       ),
     );
   }
