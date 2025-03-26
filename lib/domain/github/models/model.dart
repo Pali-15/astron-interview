@@ -3,6 +3,17 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'model.g.dart';
 
 @JsonSerializable()
+class RepositoryQueryResult extends Equatable {
+  final int maxIndex;
+  final List<Repository> items;
+
+  const RepositoryQueryResult({required this.maxIndex, required this.items});
+
+  @override
+  List<Object?> get props => [maxIndex, items];
+}
+
+@JsonSerializable()
 class Repository extends Equatable {
   final String name;
   final String? fullName;

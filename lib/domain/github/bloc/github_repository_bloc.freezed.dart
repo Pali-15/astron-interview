@@ -20,32 +20,40 @@ mixin _$GithubRepositoryEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String query) query,
+    required TResult Function(String query, int nextIndex) getPageByIndex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String query)? query,
+    TResult? Function(String query, int nextIndex)? getPageByIndex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String query)? query,
+    TResult Function(String query, int nextIndex)? getPageByIndex,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GithubRepositoryQueryEvent value) query,
+    required TResult Function(GithubRepositoryGetPageByIndexEvent value)
+        getPageByIndex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GithubRepositoryQueryEvent value)? query,
+    TResult? Function(GithubRepositoryGetPageByIndexEvent value)?
+        getPageByIndex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GithubRepositoryQueryEvent value)? query,
+    TResult Function(GithubRepositoryGetPageByIndexEvent value)? getPageByIndex,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -168,6 +176,7 @@ class _$GithubRepositoryQueryEventImpl implements GithubRepositoryQueryEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String query) query,
+    required TResult Function(String query, int nextIndex) getPageByIndex,
   }) {
     return query(this.query);
   }
@@ -176,6 +185,7 @@ class _$GithubRepositoryQueryEventImpl implements GithubRepositoryQueryEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String query)? query,
+    TResult? Function(String query, int nextIndex)? getPageByIndex,
   }) {
     return query?.call(this.query);
   }
@@ -184,6 +194,7 @@ class _$GithubRepositoryQueryEventImpl implements GithubRepositoryQueryEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String query)? query,
+    TResult Function(String query, int nextIndex)? getPageByIndex,
     required TResult orElse(),
   }) {
     if (query != null) {
@@ -196,6 +207,8 @@ class _$GithubRepositoryQueryEventImpl implements GithubRepositoryQueryEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GithubRepositoryQueryEvent value) query,
+    required TResult Function(GithubRepositoryGetPageByIndexEvent value)
+        getPageByIndex,
   }) {
     return query(this);
   }
@@ -204,6 +217,8 @@ class _$GithubRepositoryQueryEventImpl implements GithubRepositoryQueryEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GithubRepositoryQueryEvent value)? query,
+    TResult? Function(GithubRepositoryGetPageByIndexEvent value)?
+        getPageByIndex,
   }) {
     return query?.call(this);
   }
@@ -212,6 +227,7 @@ class _$GithubRepositoryQueryEventImpl implements GithubRepositoryQueryEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GithubRepositoryQueryEvent value)? query,
+    TResult Function(GithubRepositoryGetPageByIndexEvent value)? getPageByIndex,
     required TResult orElse(),
   }) {
     if (query != null) {
@@ -237,12 +253,181 @@ abstract class GithubRepositoryQueryEvent implements GithubRepositoryEvent {
 }
 
 /// @nodoc
+abstract class _$$GithubRepositoryGetPageByIndexEventImplCopyWith<$Res>
+    implements $GithubRepositoryEventCopyWith<$Res> {
+  factory _$$GithubRepositoryGetPageByIndexEventImplCopyWith(
+          _$GithubRepositoryGetPageByIndexEventImpl value,
+          $Res Function(_$GithubRepositoryGetPageByIndexEventImpl) then) =
+      __$$GithubRepositoryGetPageByIndexEventImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String query, int nextIndex});
+}
+
+/// @nodoc
+class __$$GithubRepositoryGetPageByIndexEventImplCopyWithImpl<$Res>
+    extends _$GithubRepositoryEventCopyWithImpl<$Res,
+        _$GithubRepositoryGetPageByIndexEventImpl>
+    implements _$$GithubRepositoryGetPageByIndexEventImplCopyWith<$Res> {
+  __$$GithubRepositoryGetPageByIndexEventImplCopyWithImpl(
+      _$GithubRepositoryGetPageByIndexEventImpl _value,
+      $Res Function(_$GithubRepositoryGetPageByIndexEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of GithubRepositoryEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? query = null,
+    Object? nextIndex = null,
+  }) {
+    return _then(_$GithubRepositoryGetPageByIndexEventImpl(
+      query: null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      nextIndex: null == nextIndex
+          ? _value.nextIndex
+          : nextIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GithubRepositoryGetPageByIndexEventImpl
+    implements GithubRepositoryGetPageByIndexEvent {
+  const _$GithubRepositoryGetPageByIndexEventImpl(
+      {required this.query, required this.nextIndex});
+
+  @override
+  final String query;
+  @override
+  final int nextIndex;
+
+  @override
+  String toString() {
+    return 'GithubRepositoryEvent.getPageByIndex(query: $query, nextIndex: $nextIndex)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GithubRepositoryGetPageByIndexEventImpl &&
+            (identical(other.query, query) || other.query == query) &&
+            (identical(other.nextIndex, nextIndex) ||
+                other.nextIndex == nextIndex));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, query, nextIndex);
+
+  /// Create a copy of GithubRepositoryEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GithubRepositoryGetPageByIndexEventImplCopyWith<
+          _$GithubRepositoryGetPageByIndexEventImpl>
+      get copyWith => __$$GithubRepositoryGetPageByIndexEventImplCopyWithImpl<
+          _$GithubRepositoryGetPageByIndexEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String query) query,
+    required TResult Function(String query, int nextIndex) getPageByIndex,
+  }) {
+    return getPageByIndex(this.query, nextIndex);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String query)? query,
+    TResult? Function(String query, int nextIndex)? getPageByIndex,
+  }) {
+    return getPageByIndex?.call(this.query, nextIndex);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String query)? query,
+    TResult Function(String query, int nextIndex)? getPageByIndex,
+    required TResult orElse(),
+  }) {
+    if (getPageByIndex != null) {
+      return getPageByIndex(this.query, nextIndex);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GithubRepositoryQueryEvent value) query,
+    required TResult Function(GithubRepositoryGetPageByIndexEvent value)
+        getPageByIndex,
+  }) {
+    return getPageByIndex(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GithubRepositoryQueryEvent value)? query,
+    TResult? Function(GithubRepositoryGetPageByIndexEvent value)?
+        getPageByIndex,
+  }) {
+    return getPageByIndex?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GithubRepositoryQueryEvent value)? query,
+    TResult Function(GithubRepositoryGetPageByIndexEvent value)? getPageByIndex,
+    required TResult orElse(),
+  }) {
+    if (getPageByIndex != null) {
+      return getPageByIndex(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GithubRepositoryGetPageByIndexEvent
+    implements GithubRepositoryEvent {
+  const factory GithubRepositoryGetPageByIndexEvent(
+          {required final String query, required final int nextIndex}) =
+      _$GithubRepositoryGetPageByIndexEventImpl;
+
+  @override
+  String get query;
+  int get nextIndex;
+
+  /// Create a copy of GithubRepositoryEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GithubRepositoryGetPageByIndexEventImplCopyWith<
+          _$GithubRepositoryGetPageByIndexEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$GithubRepositoryState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Repository> searchResult) loaded,
+    required TResult Function(List<Repository> searchResult, int currentIndex,
+            int maxIndex, String currentQuery)
+        loaded,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -250,7 +435,9 @@ mixin _$GithubRepositoryState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Repository> searchResult)? loaded,
+    TResult? Function(List<Repository> searchResult, int currentIndex,
+            int maxIndex, String currentQuery)?
+        loaded,
     TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -258,7 +445,9 @@ mixin _$GithubRepositoryState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Repository> searchResult)? loaded,
+    TResult Function(List<Repository> searchResult, int currentIndex,
+            int maxIndex, String currentQuery)?
+        loaded,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -360,7 +549,9 @@ class _$GithubRepositoryInitialStateImpl
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Repository> searchResult) loaded,
+    required TResult Function(List<Repository> searchResult, int currentIndex,
+            int maxIndex, String currentQuery)
+        loaded,
     required TResult Function(String error) error,
   }) {
     return initial();
@@ -371,7 +562,9 @@ class _$GithubRepositoryInitialStateImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Repository> searchResult)? loaded,
+    TResult? Function(List<Repository> searchResult, int currentIndex,
+            int maxIndex, String currentQuery)?
+        loaded,
     TResult? Function(String error)? error,
   }) {
     return initial?.call();
@@ -382,7 +575,9 @@ class _$GithubRepositoryInitialStateImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Repository> searchResult)? loaded,
+    TResult Function(List<Repository> searchResult, int currentIndex,
+            int maxIndex, String currentQuery)?
+        loaded,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -483,7 +678,9 @@ class _$GithubRepositoryLoadingStateImpl
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Repository> searchResult) loaded,
+    required TResult Function(List<Repository> searchResult, int currentIndex,
+            int maxIndex, String currentQuery)
+        loaded,
     required TResult Function(String error) error,
   }) {
     return loading();
@@ -494,7 +691,9 @@ class _$GithubRepositoryLoadingStateImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Repository> searchResult)? loaded,
+    TResult? Function(List<Repository> searchResult, int currentIndex,
+            int maxIndex, String currentQuery)?
+        loaded,
     TResult? Function(String error)? error,
   }) {
     return loading?.call();
@@ -505,7 +704,9 @@ class _$GithubRepositoryLoadingStateImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Repository> searchResult)? loaded,
+    TResult Function(List<Repository> searchResult, int currentIndex,
+            int maxIndex, String currentQuery)?
+        loaded,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -565,7 +766,11 @@ abstract class _$$GithubRepositoryLoadedStateImplCopyWith<$Res> {
           $Res Function(_$GithubRepositoryLoadedStateImpl) then) =
       __$$GithubRepositoryLoadedStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Repository> searchResult});
+  $Res call(
+      {List<Repository> searchResult,
+      int currentIndex,
+      int maxIndex,
+      String currentQuery});
 }
 
 /// @nodoc
@@ -584,12 +789,27 @@ class __$$GithubRepositoryLoadedStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? searchResult = null,
+    Object? currentIndex = null,
+    Object? maxIndex = null,
+    Object? currentQuery = null,
   }) {
     return _then(_$GithubRepositoryLoadedStateImpl(
       searchResult: null == searchResult
           ? _value._searchResult
           : searchResult // ignore: cast_nullable_to_non_nullable
               as List<Repository>,
+      currentIndex: null == currentIndex
+          ? _value.currentIndex
+          : currentIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      maxIndex: null == maxIndex
+          ? _value.maxIndex
+          : maxIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentQuery: null == currentQuery
+          ? _value.currentQuery
+          : currentQuery // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -598,7 +818,10 @@ class __$$GithubRepositoryLoadedStateImplCopyWithImpl<$Res>
 
 class _$GithubRepositoryLoadedStateImpl implements GithubRepositoryLoadedState {
   const _$GithubRepositoryLoadedStateImpl(
-      {required final List<Repository> searchResult})
+      {required final List<Repository> searchResult,
+      required this.currentIndex,
+      required this.maxIndex,
+      required this.currentQuery})
       : _searchResult = searchResult;
 
   final List<Repository> _searchResult;
@@ -610,8 +833,15 @@ class _$GithubRepositoryLoadedStateImpl implements GithubRepositoryLoadedState {
   }
 
   @override
+  final int currentIndex;
+  @override
+  final int maxIndex;
+  @override
+  final String currentQuery;
+
+  @override
   String toString() {
-    return 'GithubRepositoryState.loaded(searchResult: $searchResult)';
+    return 'GithubRepositoryState.loaded(searchResult: $searchResult, currentIndex: $currentIndex, maxIndex: $maxIndex, currentQuery: $currentQuery)';
   }
 
   @override
@@ -620,12 +850,22 @@ class _$GithubRepositoryLoadedStateImpl implements GithubRepositoryLoadedState {
         (other.runtimeType == runtimeType &&
             other is _$GithubRepositoryLoadedStateImpl &&
             const DeepCollectionEquality()
-                .equals(other._searchResult, _searchResult));
+                .equals(other._searchResult, _searchResult) &&
+            (identical(other.currentIndex, currentIndex) ||
+                other.currentIndex == currentIndex) &&
+            (identical(other.maxIndex, maxIndex) ||
+                other.maxIndex == maxIndex) &&
+            (identical(other.currentQuery, currentQuery) ||
+                other.currentQuery == currentQuery));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_searchResult));
+      runtimeType,
+      const DeepCollectionEquality().hash(_searchResult),
+      currentIndex,
+      maxIndex,
+      currentQuery);
 
   /// Create a copy of GithubRepositoryState
   /// with the given fields replaced by the non-null parameter values.
@@ -641,10 +881,12 @@ class _$GithubRepositoryLoadedStateImpl implements GithubRepositoryLoadedState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Repository> searchResult) loaded,
+    required TResult Function(List<Repository> searchResult, int currentIndex,
+            int maxIndex, String currentQuery)
+        loaded,
     required TResult Function(String error) error,
   }) {
-    return loaded(searchResult);
+    return loaded(searchResult, currentIndex, maxIndex, currentQuery);
   }
 
   @override
@@ -652,10 +894,12 @@ class _$GithubRepositoryLoadedStateImpl implements GithubRepositoryLoadedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Repository> searchResult)? loaded,
+    TResult? Function(List<Repository> searchResult, int currentIndex,
+            int maxIndex, String currentQuery)?
+        loaded,
     TResult? Function(String error)? error,
   }) {
-    return loaded?.call(searchResult);
+    return loaded?.call(searchResult, currentIndex, maxIndex, currentQuery);
   }
 
   @override
@@ -663,12 +907,14 @@ class _$GithubRepositoryLoadedStateImpl implements GithubRepositoryLoadedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Repository> searchResult)? loaded,
+    TResult Function(List<Repository> searchResult, int currentIndex,
+            int maxIndex, String currentQuery)?
+        loaded,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(searchResult);
+      return loaded(searchResult, currentIndex, maxIndex, currentQuery);
     }
     return orElse();
   }
@@ -713,10 +959,15 @@ class _$GithubRepositoryLoadedStateImpl implements GithubRepositoryLoadedState {
 
 abstract class GithubRepositoryLoadedState implements GithubRepositoryState {
   const factory GithubRepositoryLoadedState(
-          {required final List<Repository> searchResult}) =
-      _$GithubRepositoryLoadedStateImpl;
+      {required final List<Repository> searchResult,
+      required final int currentIndex,
+      required final int maxIndex,
+      required final String currentQuery}) = _$GithubRepositoryLoadedStateImpl;
 
   List<Repository> get searchResult;
+  int get currentIndex;
+  int get maxIndex;
+  String get currentQuery;
 
   /// Create a copy of GithubRepositoryState
   /// with the given fields replaced by the non-null parameter values.
@@ -799,7 +1050,9 @@ class _$GithubRepositoryErrorStateImpl implements GithubRepositoryErrorState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Repository> searchResult) loaded,
+    required TResult Function(List<Repository> searchResult, int currentIndex,
+            int maxIndex, String currentQuery)
+        loaded,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -810,7 +1063,9 @@ class _$GithubRepositoryErrorStateImpl implements GithubRepositoryErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Repository> searchResult)? loaded,
+    TResult? Function(List<Repository> searchResult, int currentIndex,
+            int maxIndex, String currentQuery)?
+        loaded,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -821,7 +1076,9 @@ class _$GithubRepositoryErrorStateImpl implements GithubRepositoryErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Repository> searchResult)? loaded,
+    TResult Function(List<Repository> searchResult, int currentIndex,
+            int maxIndex, String currentQuery)?
+        loaded,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {

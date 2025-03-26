@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:template/theme.dart';
 
 class BottomNavbar extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
@@ -22,7 +23,7 @@ class BottomNavbar extends StatelessWidget {
             navigationShell.goBranch(newIndex);
           }
         },
-        selectedItemColor: Colors.blue,
+        selectedItemColor: AppColors.blue,
       ),
     );
   }

@@ -17,9 +17,36 @@ class GithubRepositoryBloc
       emit(GithubRepositoryState.loading());
       final result = await _repository.searchRepositories(event.query);
       if (result is ResultData) {
+        final RepositoryQueryResult repositoryQueryResult =
+            (result as ResultData).value;
         emit(
           GithubRepositoryState.loaded(
-            searchResult: (result as ResultData).value,
+            searchResult: repositoryQueryResult.items,
+            currentIndex: 1,
+            maxIndex: repositoryQueryResult.maxIndex,
+            currentQuery: event.query,
+          ),
+        );
+      } else {
+        emit(
+          GithubRepositoryState.error(error: (result as ResultError).message),
+        );
+      }
+    });
+    on<GithubRepositoryGetPageByIndexEvent>((event, emit) async {
+      final result = await _repository.searchRepositories(
+        event.query,
+        page: event.nextIndex,
+      );
+      if (result is ResultData) {
+        final RepositoryQueryResult repositoryQueryResult =
+            (result as ResultData).value;
+        emit(
+          GithubRepositoryState.loaded(
+            searchResult: repositoryQueryResult.items,
+            currentIndex: event.nextIndex,
+            maxIndex: repositoryQueryResult.maxIndex,
+            currentQuery: event.query,
           ),
         );
       } else {

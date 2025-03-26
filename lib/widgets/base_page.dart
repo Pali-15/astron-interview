@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:template/extensions/context_extension.dart';
 
@@ -6,11 +7,13 @@ class BasePage extends StatelessWidget {
   final Widget children;
   final String? title;
   final bool enableBackButton;
+  final EdgeInsets? padding;
   const BasePage({
     super.key,
     required this.children,
     this.title,
     this.enableBackButton = false,
+    this.padding,
   });
 
   @override
@@ -33,7 +36,13 @@ class BasePage extends StatelessWidget {
                     )
                   : null,
             ),
-      body: SafeArea(child: children),
+      body: SafeArea(
+        child: Padding(
+          padding:
+              padding ?? EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+          child: children,
+        ),
+      ),
     );
   }
 }

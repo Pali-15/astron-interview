@@ -19,6 +19,7 @@ ThemeData lightTheme = ThemeData(
     primary: AppColors.grey300,
     secondary: AppColors.grey200,
     inversePrimary: Colors.black,
+    primaryContainer: AppColors.grey300,
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
@@ -77,8 +78,9 @@ ThemeData darkTheme = ThemeData(
   colorScheme: ColorScheme.dark(
     surface: AppColors.darkGrey,
     primary: Colors.grey[700]!,
-    secondary: AppColors.darkGrey,
+    secondary: AppColors.grey,
     inversePrimary: AppColors.grey200,
+    primaryContainer: AppColors.grey,
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
@@ -142,4 +144,5 @@ class AppColors {
 
   static Color green = Colors.green;
   static Color dangerColor = Colors.red;
+  static Color blue = Colors.blue;
 }
