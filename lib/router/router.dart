@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:template/domain/github/bloc/github_repository_bloc.dart';
+import 'package:template/domain/github/models/model.dart';
 import 'package:template/presentation/repository_page/repository_list_screen.dart';
 import 'package:template/presentation/repository_page/repository_detais.dart';
 import 'package:template/presentation/profile_page/profile.dart';
@@ -78,8 +79,16 @@ class RoutesBuilder {
   }
 
   Widget repositoryDetailsPageBuilder(
-      BuildContext context, GoRouterState state) {
-    return RouteWrapper(child: HomeNested());
+    BuildContext context,
+    GoRouterState state,
+  ) {
+    final repository = state.extra as Repository;
+
+    return RouteWrapper(
+      child: RepositoryDetailsPage(
+        repository: repository,
+      ),
+    );
   }
 
   Widget profilePageBuilder(BuildContext context, GoRouterState state) {

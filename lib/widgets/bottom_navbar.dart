@@ -16,7 +16,9 @@ class BottomNavbar extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.data_saver_off_outlined), label: 'Repositories'),
+            icon: Icon(Icons.data_saver_off_outlined),
+            label: 'Repositories',
+          ),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
         currentIndex: navigationShell.currentIndex,
