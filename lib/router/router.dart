@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:template/domain/github/bloc/github_repository_bloc.dart';
 import 'package:template/presentation/home_page/home.dart';
 import 'package:template/presentation/home_page/home_nested.dart';
 import 'package:template/presentation/profile_page/profile.dart';
@@ -60,16 +62,19 @@ class AppRouter {
 }
 
 class RoutesBuilder {
-  /// Define dependencies here like blocs...
+  final GithubRepositoryBloc githubRepositoryBloc;
+
+  RoutesBuilder({
+    required this.githubRepositoryBloc,
+  });
 
   Widget homePageBuilder(BuildContext context, GoRouterState state) {
-    /// get params:
-    ///   final id = (state.extra as Map<String, dynamic>)['id'];
-    /// define onInit which will run before the page is builded:
-    ///    onInit: () => productBloc.add(LoadProductEvent(id)),
-    /// define onDispose function
-    ///   onDispose: () => timer.cancel(),
-    return RouteWrapper(child: HomePage());
+    return RouteWrapper(
+      child: BlocProvider<GithubRepositoryBloc>.value(
+        value: githubRepositoryBloc,
+        child: HomePage(),
+      ),
+    );
   }
 
   Widget homeNestedPageBuilder(BuildContext context, GoRouterState state) {
