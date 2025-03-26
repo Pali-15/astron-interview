@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'model.g.dart';
 
-@JsonSerializable()
 class RepositoryQueryResult extends Equatable {
   final int maxIndex;
   final List<Repository> items;
