@@ -1,4 +1,5 @@
 import 'package:template/domain/di/di_module.dart';
+import 'package:template/domain/di/github_di.dart';
 import 'package:template/domain/di/router_di.dart';
 
 final resolveInstance = GetIt.instance;
@@ -15,6 +16,7 @@ void disposeDependencies() {
 sealed class Bootstrap {
   static Future<void> initialize() async {
     List<DiModule> modules = [
+      GithubDiModule(),
       RouterDiModule(),
     ];
 
