@@ -13,55 +13,19 @@ import 'package:template/widgets/common/data_table.dart';
 import 'package:template/widgets/common/pagination_controller_widget.dart';
 import 'package:template/widgets/error_widget.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
+class RepositoryListPage extends StatelessWidget {
   final TextEditingController queryInputController = TextEditingController();
+  RepositoryListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BasePage(
-      title: 'Search repository',
+      title: 'Repositories',
       children: BlocBuilder<GithubRepositoryBloc, GithubRepositoryState>(
         builder: (context, state) {
           return Column(
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: queryInputController,
-                      style: context.textTheme.bodySmall,
-                      keyboardType: TextInputType.number,
-                      cursorColor: context.colorScheme.inversePrimary,
-                      decoration: InputDecoration(
-                        hintText: 'Repository name',
-                        hintStyle: context.textTheme.bodySmall,
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: context.colorScheme.inversePrimary,
-                          ),
-                          borderRadius: BorderRadius.all(AppDimensions.radiusM),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 18.w,
-                  ),
-                  AppElevatedButton.primary(
-                    label: 'Search',
-                    context: context,
-                    onPressed: () {
-                      FocusScope.of(context).unfocus();
-                      context.read<GithubRepositoryBloc>().add(
-                            GithubRepositoryEvent.query(
-                              query: queryInputController.text,
-                            ),
-                          );
-                    },
-                  ),
-                ],
-              ),
+              _SearchBar(queryInputController: queryInputController),
               if (state is GithubRepositoryLoadingState) ...[
                 Spacer(),
                 CircularProgressIndicator(
@@ -99,6 +63,52 @@ class HomePage extends StatelessWidget {
   }
 }
 
+class _SearchBar extends StatelessWidget {
+  final TextEditingController queryInputController;
+  const _SearchBar({required this.queryInputController});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: TextField(
+            controller: queryInputController,
+            style: context.textTheme.bodySmall,
+            keyboardType: TextInputType.number,
+            cursorColor: context.colorScheme.inversePrimary,
+            decoration: InputDecoration(
+              hintText: 'Repository name',
+              hintStyle: context.textTheme.bodySmall,
+              border: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: context.colorScheme.inversePrimary,
+                ),
+                borderRadius: BorderRadius.all(AppDimensions.radiusM),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 18.w,
+        ),
+        AppElevatedButton.primary(
+          label: 'Search',
+          context: context,
+          onPressed: () {
+            FocusScope.of(context).unfocus();
+            context.read<GithubRepositoryBloc>().add(
+                  GithubRepositoryEvent.query(
+                    query: queryInputController.text,
+                  ),
+                );
+          },
+        ),
+      ],
+    );
+  }
+}
+
 class _SearchResultContainer extends StatelessWidget {
   final List<Repository> repositories;
   final int currentIndex;
@@ -131,13 +141,12 @@ class _SearchResultContainer extends StatelessWidget {
         PaginationControllerWidget(
           currentIndex: currentIndex,
           maxIndex: maxIndex,
-          previousFunction: () =>
-              () => context.read<GithubRepositoryBloc>().add(
-                    GithubRepositoryEvent.getPageByIndex(
-                      query: currentQuery,
-                      nextIndex: currentIndex - 1,
-                    ),
-                  ),
+          previousFunction: () => context.read<GithubRepositoryBloc>().add(
+                GithubRepositoryEvent.getPageByIndex(
+                  query: currentQuery,
+                  nextIndex: currentIndex - 1,
+                ),
+              ),
           nextFunction: () => context.read<GithubRepositoryBloc>().add(
                 GithubRepositoryEvent.getPageByIndex(
                   query: currentQuery,

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:template/domain/github/bloc/github_repository_bloc.dart';
-import 'package:template/presentation/home_page/home.dart';
-import 'package:template/presentation/home_page/home_nested.dart';
+import 'package:template/presentation/repository_page/repository_list_screen.dart';
+import 'package:template/presentation/repository_page/repository_detais.dart';
 import 'package:template/presentation/profile_page/profile.dart';
 import 'package:template/router/route_wrapper.dart';
 import 'package:template/router/routes.dart';
@@ -20,7 +20,7 @@ class AppRouter {
   AppRouter(RoutesBuilder builder) {
     _builder = builder;
     _router = GoRouter(
-      initialLocation: AppRoutes.home,
+      initialLocation: AppRoutes.repositories,
       navigatorKey: _rootNavigatorKey,
       debugLogDiagnostics: true,
       routes: <RouteBase>[
@@ -32,14 +32,14 @@ class AppRouter {
             StatefulShellBranch(
               routes: [
                 GoRoute(
-                  path: AppRoutes.home,
-                  name: AppRoutes.home,
-                  builder: _builder.homePageBuilder,
+                  path: AppRoutes.repositories,
+                  name: AppRoutes.repositories,
+                  builder: _builder.repositoryListPageBuilder,
                   routes: [
                     GoRoute(
-                      path: AppRoutes.homeNested,
-                      name: AppRoutes.homeNested,
-                      builder: _builder.homeNestedPageBuilder,
+                      path: AppRoutes.repositoryDetails,
+                      name: AppRoutes.repositoryDetails,
+                      builder: _builder.repositoryDetailsPageBuilder,
                     ),
                   ],
                 ),
@@ -68,16 +68,17 @@ class RoutesBuilder {
     required this.githubRepositoryBloc,
   });
 
-  Widget homePageBuilder(BuildContext context, GoRouterState state) {
+  Widget repositoryListPageBuilder(BuildContext context, GoRouterState state) {
     return RouteWrapper(
       child: BlocProvider<GithubRepositoryBloc>.value(
         value: githubRepositoryBloc,
-        child: HomePage(),
+        child: RepositoryListPage(),
       ),
     );
   }
 
-  Widget homeNestedPageBuilder(BuildContext context, GoRouterState state) {
+  Widget repositoryDetailsPageBuilder(
+      BuildContext context, GoRouterState state) {
     return RouteWrapper(child: HomeNested());
   }
 

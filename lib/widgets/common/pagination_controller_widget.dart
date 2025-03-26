@@ -25,7 +25,7 @@ class PaginationControllerWidget extends StatelessWidget {
           onPressed: currentIndex > 1 ? previousFunction : null,
         ),
         Text(
-          currentIndex.toString(),
+          '$maxIndex / $currentIndex',
           style: context.textTheme.bodySmall,
         ),
         AppTextButton.transparent(
