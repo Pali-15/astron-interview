@@ -6,22 +6,6 @@ part of 'model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-RepositoryQueryResult _$RepositoryQueryResultFromJson(
-        Map<String, dynamic> json) =>
-    RepositoryQueryResult(
-      maxIndex: (json['maxIndex'] as num).toInt(),
-      items: (json['items'] as List<dynamic>)
-          .map((e) => Repository.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$RepositoryQueryResultToJson(
-        RepositoryQueryResult instance) =>
-    <String, dynamic>{
-      'maxIndex': instance.maxIndex,
-      'items': instance.items,
-    };
-
 Repository _$RepositoryFromJson(Map<String, dynamic> json) => Repository(
       name: json['name'] as String,
       fullName: json['fullName'] as String?,
