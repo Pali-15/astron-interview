@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:template/domain/github/bloc/github_repository_bloc.dart';
 import 'package:template/domain/github/models/model.dart';
 import 'package:template/extensions/context_extension.dart';
+import 'package:template/router/routes.dart';
 import 'package:template/theme.dart';
 import 'package:template/utils/app_dimensions.dart';
-import 'package:template/utils/date_formatters.dart';
 import 'package:template/widgets/base_page.dart';
 import 'package:template/widgets/common/buttons.dart';
 import 'package:template/widgets/common/data_table.dart';
@@ -165,32 +166,34 @@ class _SearchResultItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 10.h),
-      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
-      decoration: BoxDecoration(
-        color: context.colorScheme.primaryContainer,
-        borderRadius: BorderRadius.all(AppDimensions.radiusL),
-      ),
-      child: AppTableRow(
-        columnWidths: const {
-          0: FlexColumnWidth(1),
-          1: FlexColumnWidth(2),
-          2: FlexColumnWidth(1),
-        },
-        cells: [
-          TableCellData(title: 'Name', label: repository.name),
-          TableCellData(
-            title: 'Description',
-            label: repository.description ?? '-',
-          ),
-          TableCellData(
-            title: 'Updated at',
-            label: repository.updatedAt == null
-                ? '-'
-                : AppDateFormatters.ddMMyyyy.format(repository.updatedAt!),
-          ),
-        ],
+    return GestureDetector(
+      onTap: () =>
+          context.goNamed(AppRoutes.repositoryDetails, extra: repository),
+      child: Container(
+        margin: EdgeInsets.only(top: 10.h),
+        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
+        decoration: BoxDecoration(
+          color: context.colorScheme.primaryContainer,
+          borderRadius: BorderRadius.all(AppDimensions.radiusL),
+        ),
+        child: AppTableRow(
+          columnWidths: const {
+            0: FlexColumnWidth(1),
+            1: FlexColumnWidth(2),
+            2: FlexColumnWidth(1),
+          },
+          cells: [
+            TableCellData(title: 'Name', label: repository.name),
+            TableCellData(
+              title: 'Description',
+              label: repository.description ?? '-',
+            ),
+            TableCellData.fromDate(
+              title: 'Updated at',
+              date: repository.updatedAt,
+            ),
+          ],
+        ),
       ),
     );
   }

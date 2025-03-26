@@ -49,6 +49,13 @@ ThemeData lightTheme = ThemeData(
         color: AppColors.darkGrey,
       ),
     ),
+    titleMedium: GoogleFonts.roboto(
+      textStyle: TextStyle(
+        fontSize: 18.sp,
+        fontWeight: FontWeight.bold,
+        color: AppColors.darkGrey,
+      ),
+    ),
     bodyLarge: GoogleFonts.roboto(
       textStyle: TextStyle(
         fontSize: 16.sp,
@@ -106,6 +113,13 @@ ThemeData darkTheme = ThemeData(
     titleLarge: GoogleFonts.roboto(
       textStyle: TextStyle(
         fontSize: 24.sp,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
+    ),
+    titleMedium: GoogleFonts.roboto(
+      textStyle: TextStyle(
+        fontSize: 18.sp,
         fontWeight: FontWeight.bold,
         color: Colors.white,
       ),
