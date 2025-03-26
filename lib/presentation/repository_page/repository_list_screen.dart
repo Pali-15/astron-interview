@@ -8,7 +8,6 @@ import 'package:template/extensions/context_extension.dart';
 import 'package:template/router/routes.dart';
 import 'package:template/theme.dart';
 import 'package:template/utils/app_dimensions.dart';
-import 'package:template/utils/date_formatters.dart';
 import 'package:template/widgets/base_page.dart';
 import 'package:template/widgets/common/buttons.dart';
 import 'package:template/widgets/common/data_table.dart';
@@ -189,11 +188,9 @@ class _SearchResultItem extends StatelessWidget {
               title: 'Description',
               label: repository.description ?? '-',
             ),
-            TableCellData(
+            TableCellData.fromDate(
               title: 'Updated at',
-              label: repository.updatedAt == null
-                  ? '-'
-                  : AppDateFormatters.ddMMyyyy.format(repository.updatedAt!),
+              date: repository.updatedAt,
             ),
           ],
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:template/utils/date_formatters.dart';
 import 'package:template/widgets/common/data_column.dart';
 
 class AppTableRow extends StatelessWidget {
@@ -50,4 +51,16 @@ class TableCellData {
     required this.title,
     required this.label,
   });
+
+  factory TableCellData.fromDate({
+    required String title,
+    DateTime? date,
+  }) {
+    final dateString =
+        date == null ? '-' : AppDateFormatters.ddMMyyyy.format(date);
+    return TableCellData(
+      title: title,
+      label: dateString,
+    );
+  }
 }

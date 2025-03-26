@@ -34,6 +34,7 @@ class GithubRepositoryBloc
       }
     });
     on<GithubRepositoryGetPageByIndexEvent>((event, emit) async {
+      emit(GithubRepositoryState.loading());
       final result = await _repository.searchRepositories(
         event.query,
         page: event.nextIndex,
