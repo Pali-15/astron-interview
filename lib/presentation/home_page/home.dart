@@ -10,6 +10,7 @@ import 'package:template/utils/date_formatters.dart';
 import 'package:template/widgets/base_page.dart';
 import 'package:template/widgets/common/buttons.dart';
 import 'package:template/widgets/common/data_table.dart';
+import 'package:template/widgets/common/pagination_controller_widget.dart';
 import 'package:template/widgets/error_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -127,36 +128,22 @@ class _SearchResultContainer extends StatelessWidget {
                 _SearchResultItem(repository: repositories[index]),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            AppTextButton.transparent(
-              label: 'Previous',
-              onPressed: currentIndex > 1
-                  ? () => context.read<GithubRepositoryBloc>().add(
-                        GithubRepositoryEvent.getPageByIndex(
-                          query: currentQuery,
-                          nextIndex: currentIndex - 1,
-                        ),
-                      )
-                  : null,
-            ),
-            Text(
-              currentIndex.toString(),
-              style: context.textTheme.bodySmall,
-            ),
-            AppTextButton.transparent(
-              label: 'Next',
-              onPressed: currentIndex < maxIndex
-                  ? () => context.read<GithubRepositoryBloc>().add(
-                        GithubRepositoryEvent.getPageByIndex(
-                          query: currentQuery,
-                          nextIndex: currentIndex + 1,
-                        ),
-                      )
-                  : null,
-            ),
-          ],
+        PaginationControllerWidget(
+          currentIndex: currentIndex,
+          maxIndex: maxIndex,
+          previousFunction: () =>
+              () => context.read<GithubRepositoryBloc>().add(
+                    GithubRepositoryEvent.getPageByIndex(
+                      query: currentQuery,
+                      nextIndex: currentIndex - 1,
+                    ),
+                  ),
+          nextFunction: () => context.read<GithubRepositoryBloc>().add(
+                GithubRepositoryEvent.getPageByIndex(
+                  query: currentQuery,
+                  nextIndex: currentIndex + 1,
+                ),
+              ),
         ),
       ],
     );
