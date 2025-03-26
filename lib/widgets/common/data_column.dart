@@ -1,11 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:template/extensions/context_extension.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+class UrlAppDataColumn extends StatelessWidget {
+  final String title;
+  final String url;
+  final int? maxLines;
+  const UrlAppDataColumn(
+      {super.key, required this.title, required this.url, this.maxLines});
+
+  void _launchUrl(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => _launchUrl(url),
+      child: AppDataColumn(
+        title: title,
+        label: url,
+        maxLines: maxLines,
+      ),
+    );
+  }
+}
 
 class AppDataColumn extends StatelessWidget {
   final String title;
   final String label;
-  const AppDataColumn({super.key, required this.title, required this.label});
+  final int? maxLines;
+  const AppDataColumn(
+      {super.key, required this.title, required this.label, this.maxLines});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +52,7 @@ class AppDataColumn extends StatelessWidget {
         Text(
           label,
           style: context.textTheme.bodyMedium,
+          maxLines: maxLines,
         ),
       ],
     );
