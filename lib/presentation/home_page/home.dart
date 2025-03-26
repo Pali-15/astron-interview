@@ -73,7 +73,10 @@ class HomePage extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.only(top: 20.h),
                     child: _SearchResultContainer(
+                      currentIndex: state.currentIndex,
+                      maxIndex: state.maxIndex,
                       repositories: state.searchResult,
+                      currentQuery: state.currentQuery,
                     ),
                   ),
                 ),
@@ -97,7 +100,15 @@ class HomePage extends StatelessWidget {
 
 class _SearchResultContainer extends StatelessWidget {
   final List<Repository> repositories;
-  const _SearchResultContainer({required this.repositories});
+  final int currentIndex;
+  final int maxIndex;
+  final String currentQuery;
+  const _SearchResultContainer({
+    required this.repositories,
+    required this.currentIndex,
+    required this.maxIndex,
+    required this.currentQuery,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -107,10 +118,47 @@ class _SearchResultContainer extends StatelessWidget {
         style: context.textTheme.bodyLarge,
       );
     }
-    return ListView.builder(
-      itemCount: repositories.length,
-      itemBuilder: (context, index) =>
-          _SearchResultItem(repository: repositories[index]),
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            itemCount: repositories.length,
+            itemBuilder: (context, index) =>
+                _SearchResultItem(repository: repositories[index]),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            AppTextButton.transparent(
+              label: 'Previous',
+              onPressed: currentIndex > 1
+                  ? () => context.read<GithubRepositoryBloc>().add(
+                        GithubRepositoryEvent.getPageByIndex(
+                          query: currentQuery,
+                          nextIndex: currentIndex - 1,
+                        ),
+                      )
+                  : null,
+            ),
+            Text(
+              currentIndex.toString(),
+              style: context.textTheme.bodySmall,
+            ),
+            AppTextButton.transparent(
+              label: 'Next',
+              onPressed: currentIndex < maxIndex
+                  ? () => context.read<GithubRepositoryBloc>().add(
+                        GithubRepositoryEvent.getPageByIndex(
+                          query: currentQuery,
+                          nextIndex: currentIndex + 1,
+                        ),
+                      )
+                  : null,
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
