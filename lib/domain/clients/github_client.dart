@@ -1,8 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:template/constants.dart';
+import 'package:template/domain/clients/only_succes_get_cache_interceptor.dart';
 
 class GithubClient {
   final Dio _dio = Dio();
+
+  GithubClient() {
+    _dio.interceptors.add(
+      OnlySuccessGetCacheInterceptor(),
+    );
+  }
 
   Future<Response<T>> get<T>(
     String path, {
