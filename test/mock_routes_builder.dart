@@ -1,9 +1,12 @@
+import 'package:template/domain/github/bloc/github_repository_bloc.dart';
 import 'package:template/router/router.dart';
 
-RoutesBuilder buildRoutesBuilder(
-    //Only pass needed parameters as mock
-    ) {
+import 'mocks.dart';
+
+RoutesBuilder buildRoutesBuilder({
+  GithubRepositoryBloc? githubRepositoryBloc,
+}) {
   return RoutesBuilder(
-      //init dependencie: param ?? mock
-      );
+    githubRepositoryBloc: githubRepositoryBloc ?? MockGithubRepositoryBloc(),
+  );
 }
