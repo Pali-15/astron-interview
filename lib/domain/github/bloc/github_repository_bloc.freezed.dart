@@ -17,43 +17,36 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$GithubRepositoryEvent {
   String get query => throw _privateConstructorUsedError;
+  int get nextIndex => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String query) query,
-    required TResult Function(String query, int nextIndex) getPageByIndex,
+    required TResult Function(String query, int nextIndex) query,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String query)? query,
-    TResult? Function(String query, int nextIndex)? getPageByIndex,
+    TResult? Function(String query, int nextIndex)? query,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String query)? query,
-    TResult Function(String query, int nextIndex)? getPageByIndex,
+    TResult Function(String query, int nextIndex)? query,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GithubRepositoryQueryEvent value) query,
-    required TResult Function(GithubRepositoryGetPageByIndexEvent value)
-        getPageByIndex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GithubRepositoryQueryEvent value)? query,
-    TResult? Function(GithubRepositoryGetPageByIndexEvent value)?
-        getPageByIndex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GithubRepositoryQueryEvent value)? query,
-    TResult Function(GithubRepositoryGetPageByIndexEvent value)? getPageByIndex,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -71,7 +64,7 @@ abstract class $GithubRepositoryEventCopyWith<$Res> {
           $Res Function(GithubRepositoryEvent) then) =
       _$GithubRepositoryEventCopyWithImpl<$Res, GithubRepositoryEvent>;
   @useResult
-  $Res call({String query});
+  $Res call({String query, int nextIndex});
 }
 
 /// @nodoc
@@ -91,12 +84,17 @@ class _$GithubRepositoryEventCopyWithImpl<$Res,
   @override
   $Res call({
     Object? query = null,
+    Object? nextIndex = null,
   }) {
     return _then(_value.copyWith(
       query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
               as String,
+      nextIndex: null == nextIndex
+          ? _value.nextIndex
+          : nextIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -110,7 +108,7 @@ abstract class _$$GithubRepositoryQueryEventImplCopyWith<$Res>
       __$$GithubRepositoryQueryEventImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String query});
+  $Res call({String query, int nextIndex});
 }
 
 /// @nodoc
@@ -129,160 +127,9 @@ class __$$GithubRepositoryQueryEventImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? query = null,
-  }) {
-    return _then(_$GithubRepositoryQueryEventImpl(
-      query: null == query
-          ? _value.query
-          : query // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$GithubRepositoryQueryEventImpl implements GithubRepositoryQueryEvent {
-  const _$GithubRepositoryQueryEventImpl({required this.query});
-
-  @override
-  final String query;
-
-  @override
-  String toString() {
-    return 'GithubRepositoryEvent.query(query: $query)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GithubRepositoryQueryEventImpl &&
-            (identical(other.query, query) || other.query == query));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, query);
-
-  /// Create a copy of GithubRepositoryEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$GithubRepositoryQueryEventImplCopyWith<_$GithubRepositoryQueryEventImpl>
-      get copyWith => __$$GithubRepositoryQueryEventImplCopyWithImpl<
-          _$GithubRepositoryQueryEventImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String query) query,
-    required TResult Function(String query, int nextIndex) getPageByIndex,
-  }) {
-    return query(this.query);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String query)? query,
-    TResult? Function(String query, int nextIndex)? getPageByIndex,
-  }) {
-    return query?.call(this.query);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String query)? query,
-    TResult Function(String query, int nextIndex)? getPageByIndex,
-    required TResult orElse(),
-  }) {
-    if (query != null) {
-      return query(this.query);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(GithubRepositoryQueryEvent value) query,
-    required TResult Function(GithubRepositoryGetPageByIndexEvent value)
-        getPageByIndex,
-  }) {
-    return query(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GithubRepositoryQueryEvent value)? query,
-    TResult? Function(GithubRepositoryGetPageByIndexEvent value)?
-        getPageByIndex,
-  }) {
-    return query?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(GithubRepositoryQueryEvent value)? query,
-    TResult Function(GithubRepositoryGetPageByIndexEvent value)? getPageByIndex,
-    required TResult orElse(),
-  }) {
-    if (query != null) {
-      return query(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class GithubRepositoryQueryEvent implements GithubRepositoryEvent {
-  const factory GithubRepositoryQueryEvent({required final String query}) =
-      _$GithubRepositoryQueryEventImpl;
-
-  @override
-  String get query;
-
-  /// Create a copy of GithubRepositoryEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GithubRepositoryQueryEventImplCopyWith<_$GithubRepositoryQueryEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$GithubRepositoryGetPageByIndexEventImplCopyWith<$Res>
-    implements $GithubRepositoryEventCopyWith<$Res> {
-  factory _$$GithubRepositoryGetPageByIndexEventImplCopyWith(
-          _$GithubRepositoryGetPageByIndexEventImpl value,
-          $Res Function(_$GithubRepositoryGetPageByIndexEventImpl) then) =
-      __$$GithubRepositoryGetPageByIndexEventImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String query, int nextIndex});
-}
-
-/// @nodoc
-class __$$GithubRepositoryGetPageByIndexEventImplCopyWithImpl<$Res>
-    extends _$GithubRepositoryEventCopyWithImpl<$Res,
-        _$GithubRepositoryGetPageByIndexEventImpl>
-    implements _$$GithubRepositoryGetPageByIndexEventImplCopyWith<$Res> {
-  __$$GithubRepositoryGetPageByIndexEventImplCopyWithImpl(
-      _$GithubRepositoryGetPageByIndexEventImpl _value,
-      $Res Function(_$GithubRepositoryGetPageByIndexEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of GithubRepositoryEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? query = null,
     Object? nextIndex = null,
   }) {
-    return _then(_$GithubRepositoryGetPageByIndexEventImpl(
+    return _then(_$GithubRepositoryQueryEventImpl(
       query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
@@ -297,9 +144,8 @@ class __$$GithubRepositoryGetPageByIndexEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GithubRepositoryGetPageByIndexEventImpl
-    implements GithubRepositoryGetPageByIndexEvent {
-  const _$GithubRepositoryGetPageByIndexEventImpl(
+class _$GithubRepositoryQueryEventImpl implements GithubRepositoryQueryEvent {
+  const _$GithubRepositoryQueryEventImpl(
       {required this.query, required this.nextIndex});
 
   @override
@@ -309,14 +155,14 @@ class _$GithubRepositoryGetPageByIndexEventImpl
 
   @override
   String toString() {
-    return 'GithubRepositoryEvent.getPageByIndex(query: $query, nextIndex: $nextIndex)';
+    return 'GithubRepositoryEvent.query(query: $query, nextIndex: $nextIndex)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GithubRepositoryGetPageByIndexEventImpl &&
+            other is _$GithubRepositoryQueryEventImpl &&
             (identical(other.query, query) || other.query == query) &&
             (identical(other.nextIndex, nextIndex) ||
                 other.nextIndex == nextIndex));
@@ -330,38 +176,34 @@ class _$GithubRepositoryGetPageByIndexEventImpl
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$GithubRepositoryGetPageByIndexEventImplCopyWith<
-          _$GithubRepositoryGetPageByIndexEventImpl>
-      get copyWith => __$$GithubRepositoryGetPageByIndexEventImplCopyWithImpl<
-          _$GithubRepositoryGetPageByIndexEventImpl>(this, _$identity);
+  _$$GithubRepositoryQueryEventImplCopyWith<_$GithubRepositoryQueryEventImpl>
+      get copyWith => __$$GithubRepositoryQueryEventImplCopyWithImpl<
+          _$GithubRepositoryQueryEventImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String query) query,
-    required TResult Function(String query, int nextIndex) getPageByIndex,
+    required TResult Function(String query, int nextIndex) query,
   }) {
-    return getPageByIndex(this.query, nextIndex);
+    return query(this.query, nextIndex);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String query)? query,
-    TResult? Function(String query, int nextIndex)? getPageByIndex,
+    TResult? Function(String query, int nextIndex)? query,
   }) {
-    return getPageByIndex?.call(this.query, nextIndex);
+    return query?.call(this.query, nextIndex);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String query)? query,
-    TResult Function(String query, int nextIndex)? getPageByIndex,
+    TResult Function(String query, int nextIndex)? query,
     required TResult orElse(),
   }) {
-    if (getPageByIndex != null) {
-      return getPageByIndex(this.query, nextIndex);
+    if (query != null) {
+      return query(this.query, nextIndex);
     }
     return orElse();
   }
@@ -370,52 +212,46 @@ class _$GithubRepositoryGetPageByIndexEventImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GithubRepositoryQueryEvent value) query,
-    required TResult Function(GithubRepositoryGetPageByIndexEvent value)
-        getPageByIndex,
   }) {
-    return getPageByIndex(this);
+    return query(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GithubRepositoryQueryEvent value)? query,
-    TResult? Function(GithubRepositoryGetPageByIndexEvent value)?
-        getPageByIndex,
   }) {
-    return getPageByIndex?.call(this);
+    return query?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GithubRepositoryQueryEvent value)? query,
-    TResult Function(GithubRepositoryGetPageByIndexEvent value)? getPageByIndex,
     required TResult orElse(),
   }) {
-    if (getPageByIndex != null) {
-      return getPageByIndex(this);
+    if (query != null) {
+      return query(this);
     }
     return orElse();
   }
 }
 
-abstract class GithubRepositoryGetPageByIndexEvent
-    implements GithubRepositoryEvent {
-  const factory GithubRepositoryGetPageByIndexEvent(
-          {required final String query, required final int nextIndex}) =
-      _$GithubRepositoryGetPageByIndexEventImpl;
+abstract class GithubRepositoryQueryEvent implements GithubRepositoryEvent {
+  const factory GithubRepositoryQueryEvent(
+      {required final String query,
+      required final int nextIndex}) = _$GithubRepositoryQueryEventImpl;
 
   @override
   String get query;
+  @override
   int get nextIndex;
 
   /// Create a copy of GithubRepositoryEvent
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GithubRepositoryGetPageByIndexEventImplCopyWith<
-          _$GithubRepositoryGetPageByIndexEventImpl>
+  _$$GithubRepositoryQueryEventImplCopyWith<_$GithubRepositoryQueryEventImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 

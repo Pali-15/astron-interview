@@ -36,7 +36,7 @@ class GithubRepository {
       final totalCount = data['total_count'] as int;
       const maxItems = 1000;
       final cappedTotal = totalCount > maxItems ? maxItems : totalCount;
-      final maxIndex = (cappedTotal / perPage).floor();
+      final maxIndex = (cappedTotal / perPage).ceil();
 
       return ResultData(
         RepositoryQueryResult(maxIndex: maxIndex, items: repositories),
