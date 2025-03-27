@@ -12,7 +12,7 @@ class RepositoryQueryResult extends Equatable {
   List<Object?> get props => [maxIndex, items];
 }
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Repository extends Equatable {
   final String name;
   final String? fullName;
@@ -51,7 +51,7 @@ class Repository extends Equatable {
       ];
 }
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Owner extends Equatable {
   final String login;
   final String? avatarUrl;
