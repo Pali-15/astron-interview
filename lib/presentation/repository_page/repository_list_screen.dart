@@ -14,51 +14,109 @@ import 'package:template/widgets/common/data_table.dart';
 import 'package:template/widgets/common/pagination_controller_widget.dart';
 import 'package:template/widgets/error_widget.dart';
 
-class RepositoryListPage extends StatelessWidget {
+class RepositoryListPage extends StatefulWidget {
+  const RepositoryListPage({super.key});
+
+  @override
+  State<RepositoryListPage> createState() => _RepositoryListPageState();
+}
+
+class _RepositoryListPageState extends State<RepositoryListPage> {
   final TextEditingController queryInputController = TextEditingController();
-  RepositoryListPage({super.key});
+  GithubRepositoryLoadedState? _lastLoadedState;
+
+  @override
+  void dispose() {
+    queryInputController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BasePage(
       title: 'Repositories',
-      children: BlocBuilder<GithubRepositoryBloc, GithubRepositoryState>(
-        builder: (context, state) {
-          return Column(
-            children: [
-              _SearchBar(queryInputController: queryInputController),
-              if (state is GithubRepositoryLoadingState) ...[
-                Spacer(),
-                CircularProgressIndicator(
-                  color: AppColors.blue,
-                ),
-                Spacer(),
-              ],
-              if (state is GithubRepositoryLoadedState)
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 20.h),
-                    child: _SearchResultContainer(
-                      currentIndex: state.currentIndex,
-                      maxIndex: state.maxIndex,
-                      repositories: state.searchResult,
-                      currentQuery: state.currentQuery,
-                    ),
-                  ),
-                ),
-              if (state is GithubRepositoryErrorState)
-                Expanded(
-                  child: AppErrorWidget(
-                    retry: () => context.read<GithubRepositoryBloc>().add(
+      children: BlocListener<GithubRepositoryBloc, GithubRepositoryState>(
+        listener: (context, state) {
+          if (state is GithubRepositoryLoadedState) {
+            setState(() {
+              _lastLoadedState = state;
+            });
+          }
+        },
+        child: BlocBuilder<GithubRepositoryBloc, GithubRepositoryState>(
+          builder: (context, state) {
+            return Column(
+              children: [
+                _SearchBar(
+                  queryInputController: queryInputController,
+                  searchCallback: () {
+                    setState(() {
+                      _lastLoadedState = null;
+                    });
+                    FocusScope.of(context).unfocus();
+                    context.read<GithubRepositoryBloc>().add(
                           GithubRepositoryEvent.query(
                             query: queryInputController.text,
+                            nextIndex: 1,
                           ),
-                        ),
-                  ),
+                        );
+                  },
                 ),
-            ],
-          );
-        },
+                if (state is GithubRepositoryLoadingState) ...[
+                  Spacer(),
+                  CircularProgressIndicator(
+                    color: AppColors.blue,
+                  ),
+                  Spacer(),
+                ],
+                if (state is GithubRepositoryLoadedState)
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 20.h),
+                      child: _SearchResultContainer(
+                        currentIndex: state.currentIndex,
+                        maxIndex: state.maxIndex,
+                        repositories: state.searchResult,
+                        currentQuery: state.currentQuery,
+                      ),
+                    ),
+                  ),
+                if (state is GithubRepositoryErrorState)
+                  Expanded(
+                    child: AppErrorWidget(
+                      retry: () => context.read<GithubRepositoryBloc>().add(
+                            GithubRepositoryEvent.query(
+                              query: queryInputController.text,
+                              nextIndex: 1,
+                            ),
+                          ),
+                    ),
+                  ),
+                if (state is! GithubRepositoryErrorState &&
+                    _lastLoadedState != null) ...[
+                  PaginationControllerWidget(
+                    currentIndex: _lastLoadedState!.currentIndex,
+                    maxIndex: _lastLoadedState!.maxIndex,
+                    previousFunction: () =>
+                        context.read<GithubRepositoryBloc>().add(
+                              GithubRepositoryEvent.query(
+                                query: _lastLoadedState!.currentQuery,
+                                nextIndex: _lastLoadedState!.currentIndex - 1,
+                              ),
+                            ),
+                    nextFunction: () =>
+                        context.read<GithubRepositoryBloc>().add(
+                              GithubRepositoryEvent.query(
+                                query: _lastLoadedState!.currentQuery,
+                                nextIndex: _lastLoadedState!.currentIndex + 1,
+                              ),
+                            ),
+                  ),
+                ],
+              ],
+            );
+          },
+        ),
       ),
     );
   }
@@ -66,7 +124,9 @@ class RepositoryListPage extends StatelessWidget {
 
 class _SearchBar extends StatelessWidget {
   final TextEditingController queryInputController;
-  const _SearchBar({required this.queryInputController});
+  final void Function()? searchCallback;
+  const _SearchBar(
+      {required this.queryInputController, required this.searchCallback});
 
   @override
   Widget build(BuildContext context) {
@@ -96,14 +156,7 @@ class _SearchBar extends StatelessWidget {
         AppElevatedButton.primary(
           label: 'Search',
           context: context,
-          onPressed: () {
-            FocusScope.of(context).unfocus();
-            context.read<GithubRepositoryBloc>().add(
-                  GithubRepositoryEvent.query(
-                    query: queryInputController.text,
-                  ),
-                );
-          },
+          onPressed: searchCallback,
         ),
       ],
     );
@@ -130,39 +183,19 @@ class _SearchResultContainer extends StatelessWidget {
         style: context.textTheme.bodyLarge,
       );
     }
-    return Column(
-      children: [
-        Expanded(
-          child: ListView.builder(
-            itemCount: repositories.length,
-            itemBuilder: (context, index) =>
-                _SearchResultItem(repository: repositories[index]),
-          ),
-        ),
-        PaginationControllerWidget(
-          currentIndex: currentIndex,
-          maxIndex: maxIndex,
-          previousFunction: () => context.read<GithubRepositoryBloc>().add(
-                GithubRepositoryEvent.getPageByIndex(
-                  query: currentQuery,
-                  nextIndex: currentIndex - 1,
-                ),
-              ),
-          nextFunction: () => context.read<GithubRepositoryBloc>().add(
-                GithubRepositoryEvent.getPageByIndex(
-                  query: currentQuery,
-                  nextIndex: currentIndex + 1,
-                ),
-              ),
-        ),
-      ],
+    return ListView.builder(
+      itemCount: repositories.length,
+      itemBuilder: (context, index) => _SearchResultItem(
+        repository: repositories[index],
+        key: ObjectKey(repositories[index]),
+      ),
     );
   }
 }
 
 class _SearchResultItem extends StatelessWidget {
   final Repository repository;
-  const _SearchResultItem({required this.repository});
+  const _SearchResultItem({super.key, required this.repository});
 
   @override
   Widget build(BuildContext context) {

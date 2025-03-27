@@ -17,6 +17,9 @@ class PaginationControllerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (maxIndex == 1) {
+      return SizedBox.shrink();
+    }
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
