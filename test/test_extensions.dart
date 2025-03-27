@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:template/extensions/context_extension.dart';
 import 'package:template/router/router.dart';
+import 'package:template/theme.dart';
 
 extension PumpAppExtension on WidgetTester {
   Future<void> pumpAppRoute(
@@ -28,5 +29,18 @@ extension PumpAppExtension on WidgetTester {
       context?.gonNamedExt(route, extra: extra);
     }
     await pumpAndSettle();
+  }
+
+  Future<void> pumpAppWidget(Widget child) async {
+    await pumpWidget(
+      ScreenUtilInit(
+        designSize: const Size(360, 843),
+        minTextAdapt: true,
+        builder: (_, __) => MaterialApp(
+          theme: lightTheme,
+          home: Scaffold(body: child),
+        ),
+      ),
+    );
   }
 }
