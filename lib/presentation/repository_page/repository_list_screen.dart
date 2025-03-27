@@ -9,10 +9,10 @@ import 'package:template/router/routes.dart';
 import 'package:template/theme.dart';
 import 'package:template/utils/app_dimensions.dart';
 import 'package:template/widgets/base_page.dart';
-import 'package:template/widgets/common/buttons.dart';
 import 'package:template/widgets/common/data_table.dart';
 import 'package:template/widgets/common/pagination_controller_widget.dart';
 import 'package:template/widgets/error_widget.dart';
+import 'package:template/widgets/common/search_bar.dart' as searchBar;
 
 class RepositoryListPage extends StatefulWidget {
   const RepositoryListPage({super.key});
@@ -47,7 +47,8 @@ class _RepositoryListPageState extends State<RepositoryListPage> {
           builder: (context, state) {
             return Column(
               children: [
-                _SearchBar(
+                searchBar.SearchBar(
+                  hint: 'Repository name',
                   queryInputController: queryInputController,
                   searchCallback: () {
                     setState(() {
@@ -118,47 +119,6 @@ class _RepositoryListPageState extends State<RepositoryListPage> {
           },
         ),
       ),
-    );
-  }
-}
-
-class _SearchBar extends StatelessWidget {
-  final TextEditingController queryInputController;
-  final void Function()? searchCallback;
-  const _SearchBar(
-      {required this.queryInputController, required this.searchCallback});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: TextField(
-            controller: queryInputController,
-            style: context.textTheme.bodySmall,
-            keyboardType: TextInputType.number,
-            cursorColor: context.colorScheme.inversePrimary,
-            decoration: InputDecoration(
-              hintText: 'Repository name',
-              hintStyle: context.textTheme.bodySmall,
-              border: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: context.colorScheme.inversePrimary,
-                ),
-                borderRadius: BorderRadius.all(AppDimensions.radiusM),
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          width: 18.w,
-        ),
-        AppElevatedButton.primary(
-          label: 'Search',
-          context: context,
-          onPressed: searchCallback,
-        ),
-      ],
     );
   }
 }
