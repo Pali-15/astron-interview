@@ -62,8 +62,6 @@ void main() {
       maxIndex: 4,
       items: [Repository.fromJson(repositoryJson)],
     );
-    expect(data.items.length, 1);
-    expect(data.maxIndex, 4);
     expect(data, expected);
   });
 
