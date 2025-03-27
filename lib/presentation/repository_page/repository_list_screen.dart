@@ -12,7 +12,7 @@ import 'package:template/widgets/base_page.dart';
 import 'package:template/widgets/common/data_table.dart';
 import 'package:template/widgets/common/pagination_controller_widget.dart';
 import 'package:template/widgets/error_widget.dart';
-import 'package:template/widgets/common/search_bar.dart' as searchBar;
+import 'package:template/widgets/common/search_bar.dart' as search_bar;
 
 class RepositoryListPage extends StatefulWidget {
   const RepositoryListPage({super.key});
@@ -47,7 +47,7 @@ class _RepositoryListPageState extends State<RepositoryListPage> {
           builder: (context, state) {
             return Column(
               children: [
-                searchBar.SearchBar(
+                search_bar.SearchBar(
                   hint: 'Repository name',
                   queryInputController: queryInputController,
                   searchCallback: () {
