@@ -4,6 +4,6 @@ class AppRoutes {
   static const repositories = "/repositories";
   static const profile = "/profile";
 
-  //Home shell routes
+  //Repository shell routes
   static const repositoryDetails = "repositoryDetails";
 }
